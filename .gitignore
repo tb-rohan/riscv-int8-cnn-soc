@@ -1,0 +1,38 @@
+# ==============================================================================
+# RISC-V + INT8 CNN SoC Project .gitignore
+# ==============================================================================
+
+# Simulation compilation binaries and waveforms
+*.vvp
+*.vcd
+*.wdb
+*.fst
+temp_accel_test/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Vivado temporary working files and telemetry
+.Xil/
+vivado*.jou
+vivado*.log
+vivado_pid*.str
+vivado_pid*.zip
+clockInfo.txt
+*.backup.jou
+*.backup.log
+hd_visual/
+
+# Vivado intermediate checkpoints
+*.dcp
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/

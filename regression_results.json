@@ -1,0 +1,642 @@
+{
+  "timestamp": "2026-10-30 00:30:38",
+  "total_tests": 79,
+  "passed": 79,
+  "failed": 0,
+  "pass_rate_pct": 100.0,
+  "total_wall_time_s": 37.03,
+  "tests": [
+    {
+      "suite": "CPU",
+      "name": "Addition (25 + 17)",
+      "status": "PASS",
+      "cycles": 18,
+      "time_ms": 364.3,
+      "details": "Result=42, Expected=42"
+    },
+    {
+      "suite": "CPU",
+      "name": "Subtraction (-15 - 8)",
+      "status": "PASS",
+      "cycles": 20,
+      "time_ms": 43.72,
+      "details": "Result=-23, Expected=-23"
+    },
+    {
+      "suite": "CPU",
+      "name": "Multiplication (15 * 20)",
+      "status": "PASS",
+      "cycles": 477,
+      "time_ms": 82.85,
+      "details": "Result=300, Expected=300"
+    },
+    {
+      "suite": "CPU",
+      "name": "Multiplication (-7 * 9)",
+      "status": "PASS",
+      "cycles": 483,
+      "time_ms": 81.17,
+      "details": "Result=-63, Expected=-63"
+    },
+    {
+      "suite": "CPU",
+      "name": "Division (100 / 7 -> Q:14, R:2)",
+      "status": "PASS",
+      "cycles": 429,
+      "time_ms": 76.07,
+      "details": "Result=14, Expected=14"
+    },
+    {
+      "suite": "CPU",
+      "name": "Division by Zero (42 / 0 -> Q:-1, R:42)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 41.4,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Overflow Division (INT_MIN / -1)",
+      "status": "PASS",
+      "cycles": 33,
+      "time_ms": 40.26,
+      "details": "Result=-2147483648, Expected=-2147483648"
+    },
+    {
+      "suite": "CPU",
+      "name": "Bitwise AND (0xFF & 0x0F)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 35.68,
+      "details": "Result=15, Expected=15"
+    },
+    {
+      "suite": "CPU",
+      "name": "Bitwise OR (0xF0 | 0x0F)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 37.69,
+      "details": "Result=255, Expected=255"
+    },
+    {
+      "suite": "CPU",
+      "name": "Bitwise XOR (12 ^ 10)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 34.73,
+      "details": "Result=6, Expected=6"
+    },
+    {
+      "suite": "CPU",
+      "name": "Bitwise NOT (~0)",
+      "status": "PASS",
+      "cycles": 32,
+      "time_ms": 36.78,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Shift Left Logical (1 << 4)",
+      "status": "PASS",
+      "cycles": 34,
+      "time_ms": 37.49,
+      "details": "Result=16, Expected=16"
+    },
+    {
+      "suite": "CPU",
+      "name": "Shift Right Logical (64 >> 3)",
+      "status": "PASS",
+      "cycles": 36,
+      "time_ms": 35.13,
+      "details": "Result=8, Expected=8"
+    },
+    {
+      "suite": "CPU",
+      "name": "Shift Right Arithmetic (-64 >> 3)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 37.14,
+      "details": "Result=-8, Expected=-8"
+    },
+    {
+      "suite": "CPU",
+      "name": "Signed Comparison (-5 < 5)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 35.96,
+      "details": "Result=1, Expected=1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Unsigned Comparison (5 < 10)",
+      "status": "PASS",
+      "cycles": 42,
+      "time_ms": 37.68,
+      "details": "Result=1, Expected=1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Full RV32I ISA 37-Instruction Hardware Verification",
+      "status": "PASS",
+      "cycles": 249,
+      "time_ms": 52.58,
+      "details": "Instructions Verified: 37/37, StatusWord=0x50415353"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #01 (CMD=11, A=-772, B=-949)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 36.54,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #02 (CMD=12, A=-437, B=-499)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 35.27,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #03 (CMD=4, A=-715, B=508)",
+      "status": "PASS",
+      "cycles": 431,
+      "time_ms": 69.44,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #04 (CMD=2, A=385, B=516)",
+      "status": "PASS",
+      "cycles": 20,
+      "time_ms": 34.43,
+      "details": "Result=-131, Expected=-131"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #05 (CMD=9, A=-822, B=209)",
+      "status": "PASS",
+      "cycles": 34,
+      "time_ms": 35.6,
+      "details": "Result=-107741184, Expected=-107741184"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #06 (CMD=7, A=-935, B=-939)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 35.09,
+      "details": "Result=12, Expected=12"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #07 (CMD=2, A=-553, B=-524)",
+      "status": "PASS",
+      "cycles": 20,
+      "time_ms": 35.08,
+      "details": "Result=-29, Expected=-29"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #08 (CMD=9, A=232, B=-946)",
+      "status": "PASS",
+      "cycles": 34,
+      "time_ms": 38.98,
+      "details": "Result=3801088, Expected=3801088"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #09 (CMD=9, A=-593, B=466)",
+      "status": "PASS",
+      "cycles": 34,
+      "time_ms": 37.56,
+      "details": "Result=-155451392, Expected=-155451392"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #10 (CMD=11, A=436, B=116)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 36.87,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #11 (CMD=7, A=-549, B=-81)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 35.26,
+      "details": "Result=628, Expected=628"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #12 (CMD=10, A=-431, B=657)",
+      "status": "PASS",
+      "cycles": 36,
+      "time_ms": 35.07,
+      "details": "Result=32767, Expected=32767"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #13 (CMD=1, A=554, B=650)",
+      "status": "PASS",
+      "cycles": 18,
+      "time_ms": 36.73,
+      "details": "Result=1204, Expected=1204"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #14 (CMD=3, A=429, B=-135)",
+      "status": "PASS",
+      "cycles": 481,
+      "time_ms": 68.5,
+      "details": "Result=-57915, Expected=-57915"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #15 (CMD=6, A=-431, B=-682)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 36.85,
+      "details": "Result=-169, Expected=-169"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #16 (CMD=4, A=960, B=563)",
+      "status": "PASS",
+      "cycles": 429,
+      "time_ms": 62.06,
+      "details": "Result=1, Expected=1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #17 (CMD=6, A=-791, B=-811)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 35.88,
+      "details": "Result=-771, Expected=-771"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #18 (CMD=7, A=-802, B=-265)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 34.74,
+      "details": "Result=553, Expected=553"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #19 (CMD=6, A=236, B=-459)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 36.51,
+      "details": "Result=-259, Expected=-259"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #20 (CMD=13, A=-912, B=494)",
+      "status": "PASS",
+      "cycles": 42,
+      "time_ms": 36.69,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #21 (CMD=8, A=98, B=-745)",
+      "status": "PASS",
+      "cycles": 32,
+      "time_ms": 42.71,
+      "details": "Result=-99, Expected=-99"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #22 (CMD=7, A=-839, B=130)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 44.1,
+      "details": "Result=-965, Expected=-965"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #23 (CMD=5, A=698, B=287)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 37.52,
+      "details": "Result=26, Expected=26"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #24 (CMD=10, A=813, B=764)",
+      "status": "PASS",
+      "cycles": 36,
+      "time_ms": 36.64,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #25 (CMD=6, A=182, B=-607)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 35.77,
+      "details": "Result=-585, Expected=-585"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #26 (CMD=12, A=-858, B=-907)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 34.92,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #27 (CMD=11, A=-534, B=583)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 35.62,
+      "details": "Result=-5, Expected=-5"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #28 (CMD=5, A=-837, B=751)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 36.99,
+      "details": "Result=171, Expected=171"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #29 (CMD=4, A=774, B=-794)",
+      "status": "PASS",
+      "cycles": 428,
+      "time_ms": 63.22,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #30 (CMD=7, A=-431, B=-72)",
+      "status": "PASS",
+      "cycles": 30,
+      "time_ms": 35.19,
+      "details": "Result=489, Expected=489"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #31 (CMD=11, A=708, B=-253)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 37.17,
+      "details": "Result=88, Expected=88"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #32 (CMD=3, A=-242, B=-273)",
+      "status": "PASS",
+      "cycles": 476,
+      "time_ms": 64.08,
+      "details": "Result=66066, Expected=66066"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #33 (CMD=4, A=372, B=-454)",
+      "status": "PASS",
+      "cycles": 428,
+      "time_ms": 62.75,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #34 (CMD=12, A=918, B=399)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 35.62,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #35 (CMD=11, A=-854, B=247)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 36.32,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #36 (CMD=11, A=-650, B=93)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 35.64,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #37 (CMD=12, A=-499, B=-666)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 36.32,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #38 (CMD=8, A=-223, B=-448)",
+      "status": "PASS",
+      "cycles": 32,
+      "time_ms": 35.15,
+      "details": "Result=222, Expected=222"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #39 (CMD=11, A=409, B=140)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 37.81,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #40 (CMD=4, A=402, B=-336)",
+      "status": "PASS",
+      "cycles": 428,
+      "time_ms": 60.75,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #41 (CMD=13, A=589, B=-886)",
+      "status": "PASS",
+      "cycles": 42,
+      "time_ms": 35.92,
+      "details": "Result=1, Expected=1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #42 (CMD=4, A=683, B=-935)",
+      "status": "PASS",
+      "cycles": 428,
+      "time_ms": 63.05,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #43 (CMD=13, A=-354, B=-179)",
+      "status": "PASS",
+      "cycles": 42,
+      "time_ms": 37.71,
+      "details": "Result=1, Expected=1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #44 (CMD=5, A=-865, B=-568)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 38.68,
+      "details": "Result=-888, Expected=-888"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #45 (CMD=10, A=794, B=470)",
+      "status": "PASS",
+      "cycles": 36,
+      "time_ms": 37.21,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #46 (CMD=6, A=-565, B=342)",
+      "status": "PASS",
+      "cycles": 28,
+      "time_ms": 34.97,
+      "details": "Result=-545, Expected=-545"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #47 (CMD=8, A=-190, B=811)",
+      "status": "PASS",
+      "cycles": 32,
+      "time_ms": 37.67,
+      "details": "Result=189, Expected=189"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #48 (CMD=11, A=-61, B=-708)",
+      "status": "PASS",
+      "cycles": 38,
+      "time_ms": 37.46,
+      "details": "Result=-1, Expected=-1"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #49 (CMD=5, A=-715, B=-495)",
+      "status": "PASS",
+      "cycles": 26,
+      "time_ms": 38.35,
+      "details": "Result=-1007, Expected=-1007"
+    },
+    {
+      "suite": "CPU",
+      "name": "Randomized Op #50 (CMD=12, A=149, B=103)",
+      "status": "PASS",
+      "cycles": 40,
+      "time_ms": 38.02,
+      "details": "Result=0, Expected=0"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_pe",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 24.41,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_pe_array",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 29.96,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_post_proc",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 43.4,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_mem_ctrl_random",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 103.06,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_mem_ctrl_zero_scan",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 88.26,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_ctrl_unit",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 29.77,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_top",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 74.01,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "CNN",
+      "name": "tb_full_cnn",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 4218.33,
+      "details": "Simulation passed cleanly"
+    },
+    {
+      "suite": "SoC",
+      "name": "Accelerator MMIO Adapter & Watchdog Verification",
+      "status": "PASS",
+      "cycles": null,
+      "time_ms": 40.62,
+      "details": "Capability reg 0x01040408, timeout watchdog, status reg 0x0C, and back-to-back writes verified"
+    },
+    {
+      "suite": "SoC",
+      "name": "Deterministic 3-Layer Workload (Conv -> Pool -> FC)",
+      "status": "PASS",
+      "cycles": 1073,
+      "time_ms": 217.73,
+      "details": "Output tensor bytes [7, 70, 8, 80] = 0x50084607 verified"
+    },
+    {
+      "suite": "SoC",
+      "name": "Full MNIST Inference Sample #0 (Ground Truth = 7)",
+      "status": "PASS",
+      "cycles": 80874,
+      "time_ms": 13429.75,
+      "details": "Predicted digit 7, winning score 47, all 10 logits bit-exact with golden model"
+    },
+    {
+      "suite": "SoC",
+      "name": "Full MNIST Inference Sample #1 (Ground Truth = 2)",
+      "status": "PASS",
+      "cycles": 80874,
+      "time_ms": 13052.63,
+      "details": "Predicted digit 2, winning score 34, all 10 logits bit-exact with golden model"
+    }
+  ]
+}
