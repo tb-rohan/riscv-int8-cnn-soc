@@ -1,7 +1,7 @@
 # RISC-V RV32I + INT8 CNN Accelerator SoC
 
 > **Mandatory Hardware Disclaimer**
-> *This project was developed and validated entirely using cycle-accurate RTL simulation (Icarus Verilog v12.0) and AMD Vivado 2026.1 FPGA synthesis and implementation targeting the Artix-7 `xc7a100tcsg324-1`. A complete physical top wrapper (`riscv_cnn_soc_fpga_top.sv`) and master XDC pinout constraint file (`fpga_soc/constraints/riscv_cnn_soc_nexys_a7.xdc`) are fully provided for the Digilent Nexys A7-100T development board.*
+> *This project was developed and validated entirely using cycle-accurate RTL simulation (Icarus Verilog v12.0) and AMD Vivado 2026.1 FPGA synthesis and implementation targeting the Artix-7 `xc7a100tcsg324-1`. A complete physical top wrapper (`riscv_cnn_soc_fpga_top.sv`) and master XDC pinout constraint file (`fpga/constraints/riscv_cnn_soc_nexys_a7.xdc`) are fully provided for the Digilent Nexys A7-100T development board.*
 
 A complete, interview-grade System-on-Chip (SoC) integrating a 5-stage pipelined RV32I processor core with an autonomous streaming DMA engine and a dedicated 4×4 systolic-array INT8 convolutional neural network (CNN) inference accelerator via an AXI4-Lite memory-mapped interconnect.
 
@@ -169,7 +169,7 @@ The verification framework combines unit testbenches, directed ISA suites, const
 ```powershell
 python run_all.py
 # or in-tree:
-python RISC-V/scripts/run_all_regressions.py
+python scripts/run_all_regressions.py
 ```
 
 ### Master Regression Summary (79/79 PASS - 100% Success)
@@ -219,7 +219,7 @@ Implementation was performed in **AMD Vivado v2026.1 (64-bit)** at a 100 MHz tar
 
 ### 9.3 Physical Board Top Wrapper & Constraints
 - Physical top-level module: `rtl/soc/riscv_cnn_soc_fpga_top.sv`.
-- Board constraint file: `fpga_soc/constraints/riscv_cnn_soc_nexys_a7.xdc`.
+- Board constraint file: `fpga/constraints/riscv_cnn_soc_nexys_a7.xdc`.
 - Hardware features: 100 MHz oscillator input (`E3`), active-low reset button (`C12`), BTNC trigger (`N17`), 4 slide switches (`J15`, `L16`, `M13`, `R15`), 16 diagnostic LEDs, and a hardware UART serializer (115200 baud, 8-N-1) on pins `D4` (TX) and `C4` (RX).
 
 ---
@@ -233,14 +233,14 @@ For complete fresh-checkout setup and reproduction steps, see [docs/REPRODUCIBIL
 python run_all.py
 
 # 2. Run Integrated SoC In-Tree Regression Suite (79 tests)
-python RISC-V/scripts/run_all_regressions.py
+python scripts/run_all_regressions.py
 
 # 3. Run Standalone CPU Interactive Regression
-python RISC-V/scripts/run_interactive_cpu.py --directed
-python RISC-V/scripts/run_interactive_cpu.py --random --count 50 --seed 42
+python scripts/run_interactive_cpu.py --directed
+python scripts/run_interactive_cpu.py --random --count 50 --seed 42
 
 # 4. Run Multi-Sample MNIST Benchmark (10 test samples)
-python RISC-V/scripts/run_mnist_benchmark.py --samples 10
+python scripts/run_mnist_benchmark.py --samples 10
 ```
 
 ---
@@ -249,7 +249,7 @@ python RISC-V/scripts/run_mnist_benchmark.py --samples 10
 
 ### Completed Milestones
 1. **Autonomous Streaming DMA Engine:** Created `rtl/peripherals/soc_dma.sv`, bursting 196 words in ~400 cycles (~67x faster than CPU loop), cutting full inference from 80,874 to ~54,236 cycles.
-2. **Physical FPGA Top Wrapper & Pinout Mapping:** Created `riscv_cnn_soc_fpga_top.sv` and `fpga_soc/constraints/riscv_cnn_soc_nexys_a7.xdc` for Digilent Nexys A7-100T with 16 LEDs, switches, pushbuttons, and a 115200-baud UART serializer.
+2. **Physical FPGA Top Wrapper & Pinout Mapping:** Created `riscv_cnn_soc_fpga_top.sv` and `fpga/constraints/riscv_cnn_soc_nexys_a7.xdc` for Digilent Nexys A7-100T with 16 LEDs, switches, pushbuttons, and a 115200-baud UART serializer.
 3. **Synchronous Block RAM Inference:** Refactored weight memory to synchronous reads with byte-write enables (`soc_mem_ctrl.sv`), reducing LUTRAM from 180.69% to 32.34% and freeing 28,160 LUTRAMs.
 4. **Complete 100 MHz Timing Closure:** Resolved critical path bottlenecks via registered coordinate scaling and decoupled pipeline datapath flushes, closing post-route timing at **+0.060 ns WNS**, **+0.103 ns WHS**, and **0 failing endpoints**.
 5. **Unified 79-Test Master Regression:** Synchronized `run_all.py` and `scripts/run_all_regressions.py` to test identical 79 cases (67 CPU, 8 INT8, 4 SoC) with 100% pass rates.
