@@ -132,15 +132,15 @@ Physical address space decoded by `bus_interconnect.sv`:
 The software runtime (`software/asm/soc_cnn_inference.s`) coordinates end-to-end inference:
 1. **Microcode Dispatch:** CPU writes layer control words (tile counts, dimensions, strides, quantization parameters) into `INSTR_W0..W3` and commits via `INSTR_ADDR`.
 2. **Tensor Streaming:**
-   - **Autonomous DMA Mode:** Program `DMA_SRC_ADDR = 0x5000`, `DMA_DST_ADDR = 0x0`, `DMA_LEN_WORDS = 196`, and write `1` to `DMA_CTRL_STATUS[0]`. The hardware bursts the 784-byte image into the accelerator in **~400 clock cycles**.
-   - **Software Fallback Mode:** CPU executes an MMIO store loop to `DMA_ADDR` and `DMA_DATA`, consuming 27,038 cycles.
+   - **Autonomous DMA Mode:** Program `DMA_SRC_ADDR = 0x5000`, `DMA_DST_ADDR = 0x0`, `DMA_LEN_WORDS = 196`, and write `0x19` to `DMA_CTRL_STATUS` (`WR_SEL=01`, `IRQ_EN=1`, `START=1`). The hardware bursts and unpacks the 784-byte image into accelerator SRAM in **982 clock cycles** (verified bit-exact via `tb_soc_dma`).
+   - **Software CPU Loop Mode:** CPU executes an MMIO load/store unpacking loop, consuming 27,038 cycles.
 3. **Execution Kickoff:** CPU asserts `ACCEL_CTRL[0]` (`START`).
 4. **Hardware Execution:** The accelerator executes Conv1 (3x3), Pool1 (2x2), Conv2 (3x3), Pool2 (2x2), and Dense layers in **53,836 cycles**.
 5. **Status Polling / IRQ:** CPU polls `ACCEL_STATUS[0]` or waits for `accel_irq_out`.
 6. **Result Readback & Argmax:** CPU reads 10 class logits via `RES_ADDR` / `RES_DATA` and executes a software argmax search in RV32I assembly to classify the winning digit (~350 cycles).
 7. **Total Latency Comparison:**
-   - **DMA Mode:** **~54,236 clock cycles** (~0.54 ms @ 100 MHz).
-   - **CPU Fallback Mode:** **80,874 clock cycles** (~0.81 ms @ 100 MHz).
+   - **DMA Mode:** **~54,800 clock cycles** (~0.55 ms @ 100 MHz, **1,824 inferences/second**).
+   - **CPU Fallback Mode:** **80,874 clock cycles** (~0.81 ms @ 100 MHz, **1,236.5 inferences/second**).
 
 ---
 
@@ -248,11 +248,11 @@ python scripts/run_mnist_benchmark.py --samples 10
 ## 11. Completed Milestones & Future Roadmap
 
 ### Completed Milestones
-1. **Autonomous Streaming DMA Engine:** Created `rtl/peripherals/soc_dma.sv`, bursting 196 words in ~400 cycles (~67x faster than CPU loop), cutting full inference from 80,874 to ~54,236 cycles.
+1. **Autonomous Streaming DMA Engine:** Created `rtl/peripherals/soc_dma.sv` with automatic 32-bit to 4×8-bit unpacking and target buffer bank selection, bursting 196 words in 982 cycles (~17× faster than CPU loop), cutting full inference from 80,874 to ~54,800 cycles.
 2. **Physical FPGA Top Wrapper & Pinout Mapping:** Created `riscv_cnn_soc_fpga_top.sv` and `fpga/constraints/riscv_cnn_soc_nexys_a7.xdc` for Digilent Nexys A7-100T with 16 LEDs, switches, pushbuttons, and a 115200-baud UART serializer.
 3. **Synchronous Block RAM Inference:** Refactored weight memory to synchronous reads with byte-write enables (`soc_mem_ctrl.sv`), reducing LUTRAM from 180.69% to 32.34% and freeing 28,160 LUTRAMs.
 4. **Complete 100 MHz Timing Closure:** Resolved critical path bottlenecks via registered coordinate scaling and decoupled pipeline datapath flushes, closing post-route timing at **+0.060 ns WNS**, **+0.103 ns WHS**, and **0 failing endpoints**.
-5. **Unified 79-Test Master Regression:** Synchronized `run_all.py` and `scripts/run_all_regressions.py` to test identical 79 cases (67 CPU, 8 INT8, 4 SoC) with 100% pass rates.
+5. **Unified 80-Test Master Regression:** Synchronized `run_all.py` and `scripts/run_all_regressions.py` to test identical 80 cases (67 CPU, 8 INT8, 5 SoC) with 100% pass rates.
 6. **Bit-Exact Functional Equivalence:** Verified 100/100 output logits across 10 MNIST test samples matching software golden reference bit-for-bit.
 
 ### Future Architecture Extensions

@@ -145,6 +145,7 @@ module riscv_cnn_soc_top #(
     .dma_wdata   (dma_wdata),
     .dma_rdata   (dma_rdata),
     .dma_stall   (dma_stall),
+    .dma_busy    (dma_busy),
 
     .accel_req   (accel_req),
     .accel_we    (accel_we),

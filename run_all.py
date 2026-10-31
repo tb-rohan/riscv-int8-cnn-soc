@@ -41,6 +41,7 @@ VECTORS_DIR = ROOT_DIR / "vectors" / "mnist_rtl_subset"
 CPU_VVP = ROOT_DIR / "bin_cpu_interactive.vvp"
 SOC_VVP = ROOT_DIR / "bin_riscv_cnn_soc.vvp"
 ADAPTER_VVP = ROOT_DIR / "bin_accel_adapter.vvp"
+DMA_VVP = ROOT_DIR / "bin_soc_dma.vvp"
 
 sys.path.insert(0, str(ROOT_DIR / "scripts"))
 from run_interactive_cpu import python_reference
@@ -139,6 +140,17 @@ def ensure_binaries():
         ok, _, err, _ = run_cmd(cmd, cwd=ROOT_DIR)
         if not ok:
             print(f"[ERROR] Failed to compile Adapter binary: {err}")
+            sys.exit(1)
+
+    if not DMA_VVP.exists():
+        srcs = [
+            "rtl/peripherals/soc_dma.sv",
+            "tb/accelerator/tb_soc_dma.sv"
+        ]
+        cmd = ["iverilog", "-g2012", "-s", "tb_soc_dma", "-o", str(DMA_VVP)] + [str(ROOT_DIR / s) for s in srcs]
+        ok, _, err, _ = run_cmd(cmd, cwd=ROOT_DIR)
+        if not ok:
+            print(f"[ERROR] Failed to compile DMA binary: {err}")
             sys.exit(1)
 
 def run_cpu_suite():
@@ -313,7 +325,22 @@ def run_soc_suite():
     })
     print(f"  [{status}] tb_accel_adapter                 Capability, Watchdog & Status Reg Verified ({elapsed:.2f} s)")
 
-    print("  [*] Running Test 2: Small Deterministic 3-Layer Workload (Conv -> Pool -> FC)...")
+    print("  [*] Running Test 2: Autonomous Streaming DMA Controller Verification...")
+    ok, out, _, elapsed = run_cmd(["vvp", str(DMA_VVP)], cwd=ROOT_DIR)
+    cyc_m = re.search(r"completed in (\d+) clock cycles", out)
+    cycles = int(cyc_m.group(1)) if cyc_m else None
+    status = "PASS" if (ok and "ALL SOC DMA TESTS PASSED CLEANLY" in out) else "FAIL"
+    results.append({
+        "suite": "SoC",
+        "name": "Autonomous Streaming DMA Controller Verification",
+        "status": status,
+        "cycles": cycles,
+        "time_ms": round(elapsed * 1000, 2),
+        "details": "196-word (784-byte) tensor burst transfer unpacked bit-exact into accelerator feature buffer"
+    })
+    print(f"  [{status}] tb_soc_dma                       196-Word Burst to SRAM Cycles={cycles} ({elapsed:.2f} s)")
+
+    print("  [*] Running Test 3: Small Deterministic 3-Layer Workload (Conv -> Pool -> FC)...")
     ok, out, _, elapsed = run_cmd(["vvp", str(SOC_VVP), "+CMD=2"], cwd=ROOT_DIR)
     cyc_m = re.search(r"SOC_CYCLES=(\d+)", out)
     cycles = int(cyc_m.group(1)) if cyc_m else None
@@ -328,7 +355,7 @@ def run_soc_suite():
     })
     print(f"  [{status}] Small 3-Layer Test (CMD=2)       Bytes [7, 70, 8, 80] Cycles={cycles} ({elapsed:.2f} s)")
 
-    print("  [*] Running Test 3: Full MNIST Inference Sample #0 (Ground Truth = 7)...")
+    print("  [*] Running Test 4: Full MNIST Inference Sample #0 (Ground Truth = 7)...")
     img0 = VECTORS_DIR / "0" / "input.hex"
     ok, out, _, elapsed = run_cmd(["vvp", str(SOC_VVP), "+CMD=1", f"+IMAGE_HEX={img0}"], cwd=ROOT_DIR)
     cyc_m = re.search(r"SOC_CYCLES=(\d+)", out)
@@ -348,7 +375,7 @@ def run_soc_suite():
     })
     print(f"  [{status}] MNIST Sample #0 (Ground Truth=7)  Predicted=7 Score=47 Logits=10/10 EXACT Cycles={cycles} ({elapsed:.2f} s)")
 
-    print("  [*] Running Test 4: Full MNIST Inference Sample #1 (Ground Truth = 2)...")
+    print("  [*] Running Test 5: Full MNIST Inference Sample #1 (Ground Truth = 2)...")
     img1 = VECTORS_DIR / "1" / "input.hex"
     ok, out, _, elapsed = run_cmd(["vvp", str(SOC_VVP), "+CMD=1", f"+IMAGE_HEX={img1}"], cwd=ROOT_DIR)
     cyc_m = re.search(r"SOC_CYCLES=(\d+)", out)

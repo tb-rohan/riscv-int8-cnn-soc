@@ -47,6 +47,7 @@ module bus_interconnect (
   output logic [31:0] dma_wdata,
   input  logic [31:0] dma_rdata,
   input  logic        dma_stall,
+  input  logic        dma_busy,
 
   output logic        accel_req,
   output logic        accel_we,
@@ -142,6 +143,7 @@ module bus_interconnect (
   end
 
   assign cpu_stall = (sel == SEL_ACCEL) ? accel_stall :
-                     (sel == SEL_DMA)   ? dma_stall   : 1'b0;
+                     (sel == SEL_DMA)   ? dma_stall   :
+                     (sel == SEL_DMEM && dma_busy) ? 1'b1 : 1'b0;
 
 endmodule

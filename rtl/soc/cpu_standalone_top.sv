@@ -147,6 +147,14 @@ module cpu_standalone_top #(
     .uart_wdata  (uart_wdata),
     .uart_rdata  (uart_rdata),
 
+    .dma_req     (),
+    .dma_we      (),
+    .dma_addr    (),
+    .dma_wdata   (),
+    .dma_rdata   (32'h0),
+    .dma_stall   (1'b0),
+    .dma_busy    (1'b0),
+
     .accel_req   (),
     .accel_we    (),
     .accel_addr  (),
